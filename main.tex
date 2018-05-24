@@ -2,10 +2,24 @@
 
 \usetheme{Boadilla}
 
+\usefonttheme[onlymath]{serif}
+\usepackage{mathpazo}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{bm}
 \usepackage{xspace}
 % Useful common abbreviations
 \newcommand{\adas}{\textsc{adas}\xspace}
+\newcommand{\roi}{\textsc{roi}\xspace}
 \newcommand{\eg}{e.g.\xspace}
+
+% Useful math
+\renewcommand{\H}{\bm{H}}
+\newcommand{\rotmat}{\bm{\mathcal{R}}}
+
+% Set path to look for figures
+\graphicspath{{fig/}}
 
 % Define title page
 \title[Vehicle Tracking with Heading Estimation]{Vehicle Tracking with Heading Estimation \\ using a Mono Camera System}

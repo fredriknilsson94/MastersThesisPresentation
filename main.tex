@@ -158,6 +158,114 @@
 \section{Theory and Methodology}
 % ------------------------------
 
+\subsection{Target Tracking}
+
+\begin{frame}{Target Tracking}
+	The task of tracking targets:
+	\begin{itemize}
+		\item Objects of interest
+		\item Sensor measurements
+		\item Weight measurements with uncertainties
+		\item Predict how the objects moves
+	\end{itemize}
+	Used in for example:
+	\begin{itemize}
+		\item Radar-based air surveillance
+		\item Military missile guidance
+		\item \adas
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Target Tracking Flow}
+	\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\tikzstyle{elem} = [rectangle, minimum width = 3cm, minimum height=1cm, align=center, draw=black]
+
+		\node (sensorData) [elem] {Sensor data and \\ measurement processing};
+		\node (gatingAssociation) [elem, below of=sensorData, yshift=-1.25cm] {Gating and \\ measurement association};
+		\node (trackMaintenance) [elem, below right of=gatingAssociation, yshift=-1.5cm, xshift=2cm] {Track maintenance};
+		\node (filter) [elem, below left of=gatingAssociation,  yshift=-1.5cm, xshift=-2cm] {Filtering and \\ prediction};
+
+		\draw [->,very thick] (sensorData) -- (gatingAssociation);
+		\draw [->,very thick] (gatingAssociation) -- (trackMaintenance);
+		\draw [->,very thick] (trackMaintenance) -- (filter);
+		\draw [->,very thick] (filter) -- (gatingAssociation);
+	\end{tikzpicture}
+	\caption{A flow chart describing a tracking system.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Target Tracking in Mono Vision Systems}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	Vehicle detection:
+	\begin{itemize}
+		\item Appearance-based method
+		\item Motion-based method
+	\end{itemize}
+	\column{0.45\textwidth}
+	Vehicle tracking:
+	\begin{itemize}
+		\item Kalman filter variations
+		\item Particle filter
+	\end{itemize}
+	\end{columns}
+	\vfill
+	\begin{figure}
+		\centering
+		\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.6\textwidth]{roi_example}
+		\caption{The vehicle has been detected and marked by a box, referred to as the region of interest (\roi).}
+	\end{figure}
+\end{frame}
+
+\subsection{Feature Points}
+
+\begin{frame}{Feature Points}
+	Interesting points in the image.
+	\begin{itemize}
+		\item Feature detection
+		\item Feature description
+		\item Feature matching
+		\item Feature tracking
+	\end{itemize}
+	\vfill
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.6\textwidth]{harris_features}
+		\caption{\label{fig:featurepointexample} Detected feature points marked as green crosses.}
+	\end{figure}
+\end{frame}
+
+\subsection{Projective Transformation}
+
+\begin{frame}{Projective Transformation}
+	Mapping between different views of the same planar surface,
+	\begin{equation*}
+		\bm{x}^\prime \sim \H \bm{x},
+	\end{equation*}
+	where $\H$ is a nonsingular $3 \times 3$ matrix.
+	\vspace{1em}
+	The \textit{homography} $\H$ can be decomposed into
+	\begin{equation*}
+		\H = \rotmat + \bm{t} \bm{n}^T.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}{Homography for Vehicle Angular Rate}
+	\begin{itemize}
+		\item Track feature points inside the \roi
+		\item Find the homography between consecutive frames
+		\item Decompose and extract the yaw rotation
+		\item Calculate the angular rate
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\textwidth]{feature_point_correspondence}
+		\caption{Here, feature points have moved from the $1^\text{st}$ frame (red circles) to the $2^\text{nd}$ frame (green crosses).}
+	\end{figure}
+\end{frame}
+
 % ---------------
 \section{Results}
 % ---------------

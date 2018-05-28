@@ -252,6 +252,30 @@
 	\end{equation*}
 \end{frame}
 
+\begin{frame}{The Homography -- A Geometrical View}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			[plane/.style={very thick,black},
+			 image/.style={thick,black},
+			 line/.style={black}]
+
+			\draw[plane] (0,0,0) rectangle (2.5,2,0);
+			\draw[thick,->,blue] (0.5,1.5,0) -- (1,1.5,2) node[pos=0.6,anchor=west] {$n$};
+			\draw[thick,blue] (0.67,1.5,0) -- (0.75,1.5,0.3) -- (0.58,1.5,0.3);
+
+			\draw[image] (0,0,4) -- (0,2,4) -- (2,2,5) -- (2,0,5) -- cycle;
+			\draw[image] (4.3,0,5) -- (4.3,2,5) -- (5.5,2,4) -- (5.5,0,4) -- cycle;
+
+			\draw[line] (1.25,1,0) node[circle,fill,inner sep=2pt] {} -- node[label={\hspace{-1em}$\bm{x}$},pos=0.63,circle,fill,inner sep=1pt] {} (1,0,6);
+			\draw[line] (1.25,1,0) -- node[label={\hspace{1em}$\bm{x}^\prime$},pos=0.69,circle,fill,inner sep=1pt] {} (6.5,0.5,6);
+
+			\draw[very thick,->,blue] (2,1,5) .. controls (3.5,1,6) .. (4.3,1,5) node[pos=0.5,anchor=north] {$\H$};
+		\end{tikzpicture}
+		\caption{The homography describing the projective transformation between two views.}
+	\end{figure}
+\end{frame}
+
 \begin{frame}{Homography for Vehicle Angular Rate}
 	\begin{itemize}
 		\item Track feature points inside the \roi

@@ -503,6 +503,54 @@
 	\end{columns}
 \end{frame}
 
+\subsection{Homography Estimation}
+
+\begin{frame}{Homography Estimation Results -- Simulations}
+	Simulation of a moving rectangle with different Gaussian noise realisations.
+	\vspace{-2.5em}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[height=0.375\textheight]{Hom/rect_1e-2}
+		\vspace{-1.25em}
+		\caption{Standard deviation 0.01 [px].}
+	\end{figure}
+	\vspace{-2.5em}
+	\begin{figure}
+		\includegraphics[height=0.375\textheight]{Hom/rect_1e-1}
+		\vspace{-1.25em}
+		\caption{Standard deviation 0.1 [px].}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[height=0.375\textheight]{Hom/rect_5e-2}
+		\vspace{-1.25em}
+		\caption{Standard deviation 0.05 [px].}
+	\end{figure}
+	\vspace{-2.5em}
+	\begin{figure}
+		\includegraphics[height=0.375\textheight]{Hom/rect_5e-1}
+		\vspace{-1.25em}
+		\caption{Standard deviation 0.5 [px].}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Homography Estimation Results -- Real-world Data}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Hom/155532_AngVelComparison}
+		\caption{Target driving straight and has a variance of 0.8 rad/s on the angular rate data.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Hom/155733_AngVelComparison}
+		\caption{Target turning right and has a variance of  2 rad/s on the angular rate data.}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
 % -------------------
 \section{Conclusions}
 % -------------------

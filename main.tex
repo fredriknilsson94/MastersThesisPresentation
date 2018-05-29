@@ -9,10 +9,14 @@
 \usepackage{amsmath}
 \usepackage{bm}
 \usepackage{xspace}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
 % Useful common abbreviations
 \newcommand{\adas}{\textsc{adas}\xspace}
 \newcommand{\roi}{\textsc{roi}\xspace}
 \newcommand{\eg}{e.g.\xspace}
+\newcommand{\ekf}{\textsc{ekf}\xspace}
 
 % Useful math
 \renewcommand{\H}{\bm{H}}
@@ -288,6 +292,110 @@
 		\includegraphics[width=0.8\textwidth]{feature_point_correspondence}
 		\caption{Here, feature points have moved from the $1^\text{st}$ frame (red circles) to the $2^\text{nd}$ frame (green crosses).}
 	\end{figure}
+\end{frame}
+
+\subsection{Filtering Structure}
+
+\begin{frame}{Filtering Structure}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\tikzstyle{box} = [rectangle, minimum width=2cm, minimum height=1cm, align=center, draw=black]
+			\tikzstyle{triangle} = [regular polygon, regular polygon sides=3, align=center, draw=black, shape border rotate=-90]
+			\tikzstyle{line} = [thick, black]
+			\tikzstyle{sum} = [circle, draw=black, inner sep=1pt]
+			\tikzstyle{comb} = [circle, draw=black, inner sep=3pt]
+
+			\node (system)  [box] {System};
+			\node (model) [box, below=of system)] {Model};
+			\node (sumMeasNoise) [sum, right=of system] {$+$};
+			\node (measNoise) [above=of sumMeasNoise] {\tiny Measurement noise};
+			\node (procNoise) [above=of system] {\tiny Process noise};
+			\node (inputSignal) [left=of system] {\tiny Input signal};
+			\node (outputSignal) [right=of sumMeasNoise] {\tiny Sensor measurements};
+			\node (combMeas) [comb] at ($(outputSignal.west)+(-0.5,-1.6)$) {};
+			\node (combInov) [comb] at ($(combMeas)+(1.5,-0.8)$) {};
+			\node (gain) [triangle] at ($(combMeas.east)+(0.5,0)$) {};
+			\node (filterOutput) [right=of combInov] {\tiny Estimated states};
+
+			% The system
+			\draw[line,->] (procNoise) -- (system);
+			\draw[line,->] (inputSignal) -- (system);
+			\draw[line,->] (system) -- (sumMeasNoise);
+			\draw[line,->] (measNoise) -- (sumMeasNoise);
+			\draw[line,->] (sumMeasNoise) -- (outputSignal);
+
+			% The filter
+			\onslide<1>
+			{
+				\draw[line,->] ($(inputSignal.east)+(0.5,0)$) |- ([yshift=0.3cm]model);
+			}
+			\draw[line,->] ([yshift=0.4cm]model.east) -- (combMeas.west) node[pos=0.65, anchor=north] {\tiny Predicted measurements} node[anchor=south east] {\tiny $+$};
+			\draw[line,->] ($(outputSignal.west)+(-0.5,0)$) -- ($(outputSignal.west)+(-0.5,-0.75)$) -| (combMeas.north) node[anchor=south east] {\tiny $-$};
+			\draw[line,->] (combMeas.east) -- (gain);
+			\draw[line,->] ([yshift=-0.0cm]model.east) -| (gain.south)  node[pos=0.125, anchor=north] {\tiny Kalman gain};
+			\draw[line,->] (gain.east) -| (combInov.north) node[anchor=south east] {\tiny $+$};
+			\draw[line,->] ([yshift=-0.4cm]model.east) -- (combInov.west) node[pos=0.25, anchor=north] {\tiny Predicted states} node[anchor=south east] {\tiny $+$};
+			\draw[line,->] (combInov) -- (filterOutput);
+			\draw[line,->] ([xshift=-0.5cm]filterOutput.west) -- ($(filterOutput.west)+(-0.5,-1)$) -- ($(filterOutput.west)+(-7.2,-1)$) |- ([yshift=-0.3cm]model.west);
+
+			\onslide<2>
+			{
+			% Surround the filter with a box
+			\draw[thick, dashed, blue] ($(model.north west)+(-0.75,0.5)$) rectangle ($([xshift=-0.5cm]filterOutput.west)+(0.25,-1.25)$) node[yshift=-0.25cm,xshift=-1cm] {Kalman filter};
+			% Surround the system with a box
+			\draw[very thick, dotted, red] ($(system.north west)+(-0.75,0.25)$) rectangle ($([xshift=-0.5cm]outputSignal.west)+(0.25,-0.75)$) node[anchor=south east,xshift=2.1cm] {The vehicle};
+			}
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Different Image Measurements}
+	\begin{columns}
+	\column{0.45\textwidth}
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=\textwidth]{roi_example}};
+		\draw[red, thick, |->] (0,-0.4) -- (0.35,-0.4) node[anchor=north] {\tiny $p_\text{HCP}$};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=\textwidth]{roi_example}};
+		\draw[red, thick, <->] (0.08,0.1) -- (0.6,0.1) node[pos = 0.5, anchor=south] {\tiny $p_\text{Width}$};
+	\end{tikzpicture}
+	\column{0.45\textwidth}
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=\textwidth]{roi_example}};
+		\draw[red, thick, |->] (0.35,0) -- (0.35,-0.38) node[pos = 0.5, anchor=west] {\tiny $p_\text{Bottom}$};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 16cm 0},width=\textwidth]{corners_example}};
+		\node[red,circle,fill,inner sep=0.5pt,label=left:{\color{red}\tiny FL}] at (-0.4,-0.35) {};
+		\node[red,circle,fill,inner sep=0.5pt,label=below:{\color{red}\tiny RL}] at (0.075,-0.4) {};
+		\node[red,circle,fill,inner sep=0.5pt,label=right:{\color{red}\tiny RR}] at (0.4,-0.37) {};
+	\end{tikzpicture}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Summary of the Filter Structure}
+	\begin{columns}
+	\column{0.6\textwidth}
+		\begin{itemize}
+			\item Vehicle modelled as a rectangle
+			\item An extended Kalman filter (\ekf)
+			\item A constant velocity motion model
+			\item State vector $\bm{x}=\begin{pmatrix} x & y & z & v & \psi & \omega \end{pmatrix}^T$
+		\end{itemize}
+	\column{0.4\textwidth}
+		\begin{figure}
+			\begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+				\draw (0,0) -- (3,1) -- (1.5,5.5) -- (-1.5,4.5) -- cycle;
+				\draw[dashed] (-0.5,1.5) -- (2.5,2.5) node[pos=0.3, anchor=north west] {$(x,y,z)$};
+				\draw[->] (1,2) node[circle,fill,inner sep=1.5pt] {} -- (0.3,4) node[anchor=south] {$v$};
+				\draw[dotted] (1,2) -- (1,4);
+				\draw[<-] (0.65,3) .. controls (0.8,3.1) .. (1,3.1) node[pos=0.5, anchor=west] {\hspace{0.2cm}$\psi, \omega$};
+		    \end{tikzpicture}
+		    \caption{Target vehicle model.}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 % ---------------

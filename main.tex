@@ -402,6 +402,107 @@
 \section{Results}
 % ---------------
 
+\subsection{Simulated results}
+
+\begin{frame}{Monte Carlo Simulations -- No. 1}
+	The target is driving straight.
+	\vspace{2em}
+	\begin{columns}
+	\column{0.45\textwidth}
+	\includegraphics[width=\textwidth]{Traj/20_MC_TrajPos}
+	\column{0.45\textwidth}
+	\includegraphics[width=\textwidth]{Traj/20_MC_TrajOther}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Monte Carlo Results -- No. 1}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/27_MC_1000_Rmse}
+		\caption{Only \roi measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/22_MC_1000_Rmse}
+		\caption{\roi and angular rate (with noise variance 1 rad/s) measurements.}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Monte Carlo Results -- No. 1}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/21_MC_1000_Rmse}
+		\caption{\roi and angular rate (with noise variance 0.5 rad/s) measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/20_MC_1000_Rmse}
+		\caption{\roi and angular rate (with noise variance 0.1 rad/s) measurements.}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Monte Carlo Simulations -- No. 2}
+	The target is turning to the right.
+	\vspace{1em}
+	\begin{columns}
+	\column{0.45\textwidth}
+	\includegraphics[width=\textwidth]{Traj/23_MC_TrajPos}
+	\column{0.45\textwidth}
+	\includegraphics[width=\textwidth]{Traj/23_MC_TrajOther}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Monte Carlo Results -- No. 2}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/13_MC_1000_Rmse}
+		\caption{Only \roi measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/25_MC_1000_Rmse}
+		\caption{\roi and angular rate (with noise variance 1 rad/s) measurements.}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Monte Carlo Results -- No. 2}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/24_MC_1000_Rmse}
+		\caption{\roi and angular rate (with noise variance 0.5 rad/s) measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/23_MC_1000_Rmse}
+		\caption{\roi and angular rate (with noise variance 0.1 rad/s) measurements.}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Monte Carlo Results with Corner Measurements}
+	\begin{columns}[T]
+	\column{0.45\textwidth}
+	Driving straight (no. 1):
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/30_MC_1000_Rmse}
+		\caption{\roi, angular rate and corner measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	Turning right (no. 2):
+	\begin{figure}
+		\includegraphics[width=\textwidth]{MC/29_MC_1000_Rmse}
+		\caption{\roi, angular rate and corner measurements.}
+	\end{figure}
+	\end{columns}
+\end{frame}
+
 % -------------------
 \section{Conclusions}
 % -------------------

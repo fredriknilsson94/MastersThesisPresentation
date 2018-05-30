@@ -1,10 +1,19 @@
 \documentclass{beamer}
 
+\usepackage{pgfpages}
+
 \mode<presentation>
 {
 	\usetheme{Boadilla}
 	\setbeamertemplate{navigation symbols}{}
 	\setbeamerfont{caption}{size=\scriptsize}
+}
+
+\mode<handout>
+{
+	\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]
+	\setbeameroption{show only notes}
+	\setbeamerfont{note page}{size=\large}
 }
 
 \usefonttheme[onlymath]{serif}

@@ -31,6 +31,9 @@
 \newcommand{\roi}{\textsc{roi}\xspace}
 \newcommand{\eg}{e.g.\xspace}
 \newcommand{\ekf}{\textsc{ekf}\xspace}
+\renewcommand{\a}{\r{a}\xspace}
+\renewcommand{\aa}{\"a\xspace}
+\renewcommand{\o}{\"o\xspace}
 
 % Useful math
 \renewcommand{\H}{\bm{H}}
@@ -50,6 +53,13 @@
 
 \begin{frame}
 	\titlepage
+	\note
+	{
+	\begin{itemize}
+		\item Presentera dig
+		\item Beskriv att exjobbet varit ett samarbete med Veoneer
+	\end{itemize}
+	}
 \end{frame}
 
 \AtBeginSection[]
@@ -61,6 +71,12 @@
 
 \begin{frame}{Presentation Outline}
 	\tableofcontents
+	\note
+	{
+		\begin{itemize}
+			\item G\a igenom agendan f\o{}r presentationen
+		\end{itemize}
+	}
 \end{frame}
 
 % -----------------------------------
@@ -78,6 +94,13 @@
 	\begin{center}
 		\large{According to Euro NCAP, 90 \% of all world-wide traffic \\ accidents are caused by the human factor!}
 	\end{center}
+
+	\note
+	{
+		\begin{itemize}
+			\item F\o{}rklara att m\a{}nga m\aa{}nniskor p\a{}verkas av trafiksituationen varje \a{}r i Sverige
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Euro NCAP}
@@ -92,6 +115,14 @@
 		\item Puts requirements on the car manufacturers
 		\item Higher requirements in the near future!
 	\end{itemize}
+
+	\note
+	{
+		\begin{itemize}
+			\item Beskriv kortfattat vad Euro NCAP \aa{}r
+			\item Fokusera p\a{} ADAS
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Advanced Driver Assistance Systems (\adas)}
@@ -115,6 +146,15 @@
 			\caption{Copyright Autoliv}
 		\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item F\o{}rklara vad ett ADAS \aa{}r
+			\item Vilken roll har Veoneer?
+			\item Relatera till bilderna
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Target Tracking in Vision Systems}
@@ -133,6 +173,15 @@
 			Difficult to obtain heading information & Easy to obtain heading information
 		\end{tabular}
 	\end{table}
+
+	\note
+	{
+		\begin{itemize}
+			\item Beskriv kort m\a{}let med target tracking
+			\item Skillanderna mellan stereo och mono
+			\item \textbf{Fokusera p\a{} kostnaden}
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Objective of the Master's Thesis}
@@ -146,6 +195,13 @@
 			\item How does a mono camera system performs compared with a stereo camera system?
 		\end{itemize}
 	\end{block}
+
+	\note
+	{
+		\begin{itemize}
+			\item F\o{}rtydliga att vikten \aa{}r proof-of-concept
+		\end{itemize}
+	}
 \end{frame}
 
 % ------------------------------
@@ -172,6 +228,27 @@
 	\end{tikzpicture}
 	\caption{A flow chart describing a tracking system.}
 	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item \textit{Sensor data and measurement processing}
+
+			Data fr\a{}n sensorer, kan beh\o{}va f\o{}rbehandlas
+
+			\item \textit{Gating and measurement association}
+
+			Logik f\o{}r att avg\o{}ra vilka m\aa{}tningar som \aa{}r m\o{}jliga, associera m\aa{}tningar med m\a{}l
+
+			\item \textit{Track maintenance}
+
+			Skapa nya sp\a{}r, ta bort sp\a{}r, uppdatera logik kring befintliga sp\a{}r
+
+			\item \textit{Filtering and prediction}
+
+			Uppdatera sp\a{}r med m\aa{}tningar och prediktera m\a{}lets r\o{}relse tills n\aa{}sta m\aa{}tning
+		\end{itemize}
+	}
 \end{frame}
 
 \subsection{Feature Points}
@@ -190,6 +267,27 @@
 		\includegraphics[width=0.6\textwidth]{harris_features}
 		\caption{\label{fig:featurepointexample} Detected feature points marked as green crosses.}
 	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item \textit{Detection}
+
+			Olika algoritmer f\o{}r att hitta punkter, bra i olika milj\o{}er
+
+			\item \textit{Description}
+
+			En robust beskrivning av en punkts omgivning.
+
+			\item \textit{Matching}
+
+			Matcha descriptorer extraherade separate i tv\a frames
+
+			\item \textit{Tracking}
+
+			Extrahera punkter i en frame, f\o{}lj sedan dessa frame till frame, \textbf{KLT}
+		\end{itemize}
+	}
 \end{frame}
 
 \subsection{Projective Transformation}
@@ -205,6 +303,15 @@
 	\begin{equation*}
 		\H = \rotmat + \bm{t} \bm{n}^T.
 	\end{equation*}
+
+	\note
+	{
+		\begin{itemize}
+			\item Homografin relaterar hur ett plan har f\o{}rflyttats givet projicerade punkter fr\a{}n planet
+			\item Kan delas upp i \textit{rotation} och \textit{translation}
+			\item En utmaning -- Inte unik uppdelning (8 till 2 l\o{}sningar)
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{The Homography -- A Geometrical View}
@@ -229,6 +336,14 @@
 		\end{tikzpicture}
 		\caption{The homography describing the projective transformation between two views.}
 	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item Ett antagande i min rapport -- Perfekt ego-motion, dvs. stillast\a{}ende host
+			\item Homografin inducerats av planets r\o{}relse, dvs. bilens r\o{}relse
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Homography for Vehicle Angular Rate}
@@ -243,6 +358,13 @@
 		\includegraphics[width=0.8\textwidth]{feature_point_correspondence}
 		\caption{Here, feature points have moved from the $1^\text{st}$ frame (red circles) to the $2^\text{nd}$ frame (green crosses).}
 	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item Exempel hur feature punkter har f\o{}rflyttats mellan tv\a frames
+		\end{itemize}
+	}
 \end{frame}
 
 \subsection{Filtering Structure}
@@ -299,6 +421,14 @@
 			}
 		\end{tikzpicture}
 	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item Beskriv signaler till systemet
+			\item Beskriv signaler i filtret
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Different Image Measurements}
@@ -325,6 +455,14 @@
 	\end{tikzpicture}
 	\caption{The different image measurements used in the filter.}
 	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item Machine learning-algoritm tr\aa{}nad f\o{}r att detektera bilar
+			\item H\o{}rnm\aa{}tningarna finns det inget detektor f\o{}r idag
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Summary of the Filter Structure}
@@ -348,6 +486,16 @@
 		    \caption{Target vehicle model.}
 		\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Rektangel naturlig modell
+			\item Enkelt att definiera rotationen och anpassad till h\o{}rnm\aa{}tningarna
+			\item M\a{}let \aa{}r att skatta $\phi$ och $\omega$
+			\item Till\a{}nden $x, y, z$ och $v$ kommer naturligt med
+		\end{itemize}
+	}
 \end{frame}
 
 % ---------------
@@ -355,6 +503,23 @@
 % ---------------
 
 \subsection{Simulated results}
+
+\note
+{
+	\begin{itemize}
+		\item \textit{Simulated Results}
+
+		Monte Carlo simuleringar av tv\a{} fall, bed\o{}ma prestanda, \textbf{variera brusniv\a{}er}
+
+		\item \textit{Homography Estimation}
+
+		Hur bra \a{}r min metod f\o{}r att skatta homografier, simulerad rektangel (baksidan av en bil)
+
+		\item \textit{Stereo Comparison}
+
+		Ett av m\a{}len, j\aa{}mf\o{}ra med ett stereo kamera system
+	\end{itemize}
+}
 
 \begin{frame}{Monte Carlo Simulations -- No. 1}
 	The target is driving straight.
@@ -365,6 +530,15 @@
 	\column{0.45\textwidth}
 	\includegraphics[width=\textwidth]{Traj/20_MC_TrajOther}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Targetbil som k\o{}r rakt fram
+			\item Konstant hastighet
+			\item Ingen rotation
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Monte Carlo Results -- No. 1}
@@ -380,6 +554,14 @@
 		\caption{\roi and angular rate (with noise variance 1 rad/s) measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Visar felet mellan skattade och sanna tillst\a{}nd
+			\item H\aa{}r ger vinkelhastighetsm\aa{}tningarna ingen information
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Monte Carlo Results -- No. 1}
@@ -395,6 +577,14 @@
 		\caption{\roi and angular rate (with noise variance 0.1 rad/s) measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Om tillr\aa{}kligt l\a{}gt brus ger vinkelhastighetsm\aa{}tningarna bra information
+			\item Fokusera p\a{} orientering och vinkelhastighet
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Monte Carlo Simulations -- No. 2}
@@ -406,6 +596,15 @@
 	\column{0.45\textwidth}
 	\includegraphics[width=\textwidth]{Traj/23_MC_TrajOther}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Targetbil som k\o{}r rakt och sv\aa{}nger sedan till h\o{}ger
+			\item Konstant hastighet
+			\item Tonstant rotationshastighet under sv\aa{}ngen
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Monte Carlo Results -- No. 2}
@@ -421,6 +620,14 @@
 		\caption{\roi and angular rate (with noise variance 1 rad/s) measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Visar felet mellan skattade och sanna tillst\a{}nd
+			\item H\aa{}r ger vinkelhastighetsm\aa{}tningarna ingen information
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Monte Carlo Results -- No. 2}
@@ -436,6 +643,14 @@
 		\caption{\roi and angular rate (with noise variance 0.1 rad/s) measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Om tillr\aa{}kligt l\a{}gt brus ger vinkelhastighetsm\aa{}tningarna bra information
+			\item Fokusera p\a{} orientering och vinkelhastighet
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Monte Carlo Results with Corner Measurements}
@@ -453,6 +668,14 @@
 		\caption{\roi, angular rate and corner measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Stor prestandaf\o{}rb\aa{}ttring om h\o{}rnm\aa{}tningar hade funnits
+			\item B\aa{}ttre prestanda vid sv\aa{}ng -- 3 h\o{}rn synliga
+		\end{itemize}
+	}
 \end{frame}
 
 \subsection{Homography Estimation}
@@ -486,6 +709,17 @@
 		\caption{Standard deviation 0.5 [px].}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Simulerad sv\aa{}ng m.h.a. trackade feature punkter innanf\o{}r en rektangel
+			\vspace{2em}
+			\item Additativt brus vid projicering till bildplanet
+			\item Tyv\aa{}r verkar metoden vara brusk\aa{}nslig
+			\item S\a{}mre p\a{} l\aa{}ngre avst\a{}nd
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Homography Estimation Results -- Real-world Data}
@@ -501,6 +735,24 @@
 		\caption{Target turning right and has a variance of  2 rad/s on the angular rate data.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item \textit{F\o{}rsta sekvensen}
+
+			Hyffsat okej skattning med lite f\o{}r stor varians
+
+			\item \textit{Andra sekvensen}
+
+			\"Overskattar sv\aa{}ngen och har f\o{}r stor varians
+
+			\vspace{2em}
+			\item F\o{}rb\aa{}ttra feature punkt f\o{}ljningen
+			\item Utveckla homografiskattningsmetoden
+			\item Fundamental begr\aa{}nsning -- Avst\a{}ndet till targetbilen?
+		\end{itemize}
+	}
 \end{frame}
 
 \subsection{Stereo Comparison}
@@ -519,6 +771,13 @@
 		\caption{\roi, angular rate and corner measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Ingen signifikant f\o{}rb\aa{}ttring när h\o{}rnm\aa{}tningar l\aa{}ggs till
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{Stereo Comparison -- No. 2}
@@ -535,6 +794,15 @@
 		\caption{\roi, angular rate and corner measurements.}
 	\end{figure}
 	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item F\o{}rb\aa{}ttring i b\o{}rjan och i slutet
+			\item 3 h\o{}rn synliga fr\a{}n frame nr. 60 -{}-$>$
+			\item Ingen st\o{}rre f\o{}rb\aa{}ttring i vinkelhastighet, f\o{}r d\a{}liga m\aa{}tningar?
+		\end{itemize}
+	}
 \end{frame}
 
 % -------------------
@@ -551,6 +819,19 @@
 		\item The extended Kalman filter is a suitable filter structure.
 		\item Still some performance difference compared to stereo.
 	\end{itemize}
+
+	\note
+	{
+		\begin{itemize}
+			\item Ganska h\o{}ga krav p\a{} m\aa{}tningarnas noggrannhet
+			\item Utifr\a{}n simuleringarna verkar metoden (\ekf med rektangel model) fungera v\aa{}l
+			\item Fortfarande en bit kvar till stereo prestanda, speciellt i vinkelhastighet
+			\vspace{2em}
+			\item Utveckla homografiskattningsmetoden
+			\item F\o{}rb\aa{}tra feature punkt f\o{}ljningen
+			\item Skapa en h\o{}rndetektor
+		\end{itemize}
+	}
 \end{frame}
 
 \end{document}

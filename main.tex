@@ -755,6 +755,58 @@
 	}
 \end{frame}
 
+\begin{frame}<presentation:0>[noframenumbering]
+	\frametitle{Homography Estimation Results -- Veoneer's FPM (1)}
+	The target is driving straight.
+	\begin{columns}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155532_AngVel_NoGate_fpm}
+		\caption{Non pre-processed angular rate measurements. The variance is 22 rad/s.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155532_AngVelMeasurements}
+		\caption{Pre-processed angular rate measurements. The variance is 12 rad/s.}
+	\end{figure}
+	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Pre-processed: measurements rejected by the measurement gate and threshold at $|\}omega|<10$ rad/s.
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}<presentation:0>[noframenumbering]
+	\frametitle{Homography Estimation Results -- Veoneer's FPM (2)}
+	The target is turning to the right.
+	\begin{columns}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155733_AngVel_NoGate_fpm}
+		\caption{Non pre-processed angular rate measurements. The variance is 17 rad/s.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155733_AngVelMeasurements}
+		\caption{Pre-processed angular rate measurements. The variance is 5 rad/s.}
+	\end{figure}
+	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Pre-processed: measurements rejected by the measurement gate and threshold at $|\}omega|<10$ rad/s.
+		\end{itemize}
+	}
+\end{frame}
+
 \subsection{Stereo Comparison}
 
 \begin{frame}{Stereo Comparison -- No. 1}
@@ -780,6 +832,33 @@
 	}
 \end{frame}
 
+\begin{frame}<presentation:0>[noframenumbering]
+	\frametitle{Stereo Comparison -- Veoneer's FPM (1)}
+	The target is turning to the right.
+	\begin{columns}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155532_RoiAngVel_gate}
+		\caption{\roi and angular rate measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155532_AllMeasurements_gate}
+		\caption{\roi, angular rate and corner measurements.}
+	\end{figure}
+	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Ganska skakigt resultat i orientering
+			\item Stor f\o{}rb\aa{}tring med h\o{}rnm\aa{}tningar
+		\end{itemize}
+	}
+\end{frame}
+
 \begin{frame}{Stereo Comparison -- No. 2}
 	The target is turning to the right.
 	\begin{columns}[T]
@@ -801,6 +880,33 @@
 			\item F\o{}rb\aa{}ttring i b\o{}rjan och i slutet
 			\item 3 h\o{}rn synliga fr\a{}n frame nr. 60 -{}-$>$
 			\item Ingen st\o{}rre f\o{}rb\aa{}ttring i vinkelhastighet, f\o{}r d\a{}liga m\aa{}tningar?
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}<presentation:0>[noframenumbering]
+	\frametitle{Stereo Comparison -- Veoneer's FPM (2)}
+	The target is turning to the right.
+	\begin{columns}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155733_RoiAngVel_gate}
+		\caption{\roi and angular rate measurements.}
+	\end{figure}
+	\column{0.45\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{Veoneer/155733_AllMeasurements_gate}
+		\caption{\roi, angular rate and corner measurements.}
+	\end{figure}
+	\end{columns}
+
+	\note
+	{
+		\begin{itemize}
+			\item Ganska skakigt resultat i orientering
+			\item Stor f\o{}rb\aa{}tring med h\o{}rnm\aa{}tningar
 		\end{itemize}
 	}
 \end{frame}

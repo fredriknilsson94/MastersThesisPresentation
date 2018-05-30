@@ -108,37 +108,22 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Mono compared to Stereo Vision}
-	\begin{columns}
-		\column{0.5\textwidth}
-		Mono vision
-		\begin{itemize}
-			\item[$+$] Object detection
-			\item[$+$] Less expansive
-			\item[$-$] Lacking depth information
-			\item[$-$] Increased algorithm complexity
-		\end{itemize}
-		\column{0.4\textwidth}
-		\begin{center}
-			\includegraphics[width=3cm]{fig/ALV_Mono-Vision-Sensor}
-		\end{center}
-	\end{columns}
-	\vspace{1em}
-	\begin{columns}
-		\column{0.5\textwidth}
-		Stereo vision
-		\begin{itemize}
-			\item[$+$] Object detection
-			\item[$+$] Depth information
-			\item[$-$] More expensive
-		\end{itemize}
-		\column{0.4\textwidth}
-		\begin{center}
-			\includegraphics[width=2.25cm]{fig/ALV_Mono-Vision-Sensor}
-			\hfill
-			\includegraphics[width=2.25cm]{fig/ALV_Mono-Vision-Sensor}
-		\end{center}
-	\end{columns}
+\begin{frame}{Target Tracking in Vision Systems}
+	Detect, track and predict the movement of other vehicles.
+	\begin{table}
+		\centering
+		\renewcommand{\arraystretch}{1.25}
+		\setlength{\arrayrulewidth}{0.5pt}
+		\begin{tabular}{p{5cm}|p{5cm}}
+			\textbf{Mono Camera System} & \textbf{Stereo Camera System} \\
+			\hline \hline
+			Less hardware (1 camera) & More hardware (2 cameras) \\ \hline
+			Vehicle detections & Vehicle detections \\ \hline
+			Track vehicle in the image plane or in the world & Track vehicle in the world \\ \hline
+			No distance information & Distance information \\ \hline
+			Difficult to obtain heading information & Easy to obtain heading information
+		\end{tabular}
+	\end{table}
 \end{frame}
 
 \begin{frame}{Objective of the Master's Thesis}
@@ -160,22 +145,6 @@
 
 \subsection{Target Tracking}
 
-\begin{frame}{Target Tracking}
-	The task of tracking targets:
-	\begin{itemize}
-		\item Objects of interest
-		\item Sensor measurements
-		\item Weight measurements with uncertainties
-		\item Predict how the objects moves
-	\end{itemize}
-	Used in for example:
-	\begin{itemize}
-		\item Radar-based air surveillance
-		\item Military missile guidance
-		\item \adas
-	\end{itemize}
-\end{frame}
-
 \begin{frame}{Target Tracking Flow}
 	\begin{figure}
 	\centering
@@ -193,29 +162,6 @@
 		\draw [->,very thick] (filter) -- (gatingAssociation);
 	\end{tikzpicture}
 	\caption{A flow chart describing a tracking system.}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Target Tracking in Mono Vision Systems}
-	\begin{columns}[T]
-	\column{0.45\textwidth}
-	Vehicle detection:
-	\begin{itemize}
-		\item Appearance-based method
-		\item Motion-based method
-	\end{itemize}
-	\column{0.45\textwidth}
-	Vehicle tracking:
-	\begin{itemize}
-		\item Kalman filter variations
-		\item Particle filter
-	\end{itemize}
-	\end{columns}
-	\vfill
-	\begin{figure}
-		\centering
-		\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.6\textwidth]{roi_example}
-		\caption{The vehicle has been detected and marked by a box, referred to as the region of interest (\roi).}
 	\end{figure}
 \end{frame}
 

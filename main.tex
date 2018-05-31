@@ -402,10 +402,7 @@
 			\draw[line,->] (sumMeasNoise) -- (outputSignal);
 
 			% The filter
-			\onslide<1>
-			{
-				\draw[line,->] ($(inputSignal.east)+(0.5,0)$) |- ([yshift=0.3cm]model);
-			}
+			\draw[line,dashed,->] ($(inputSignal.east)+(0.5,0)$) |- ([yshift=0.3cm]model);
 			\draw[line,->] ([yshift=0.4cm]model.east) -- (combMeas.west) node[pos=0.65, anchor=north] {\tiny Predicted measurements} node[anchor=south east] {\tiny $+$};
 			\draw[line,->] ($(outputSignal.west)+(-0.5,0)$) -- ($(outputSignal.west)+(-0.5,-0.75)$) -| (combMeas.north) node[anchor=south east] {\tiny $-$};
 			\draw[line,->] (combMeas.east) -- (gain);

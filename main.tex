@@ -502,9 +502,75 @@
 	}
 \end{frame}
 
+\subsection<presentation:0>
+{Observability}
+
+\begin{frame}<presentation:0>[noframenumbering]
+	\frametitle{Nonlinear Observability}
+	\begin{itemize}
+		\item In general, it is difficult to prove observability for nonlinear system.
+		\begin{align*}
+			\bm{x}_{k+1} &= \bm{f}(\bm{x}_k), \\
+			\bm{y}_k &= \bm{h}(\bm{x}_k).
+		\end{align*}
+		\item The observability Gramian matrix, $\bm{M}$, can be calculated as
+		\begin{equation*}
+			\bm{M}(t_0,t_N) = \sum_{j=t_0}^{t_N-1} \bm{\Phi}^T(j,t_0)\bm{H}^T_j\bm{H}_j\bm{\Phi}(j,t_0),
+		\end{equation*}
+		where $\bm{\Phi}$ is the transition matrix (of the linearized system) and $\bm{H}$ is the Jacobian of $\bm{h}$.
+		\item The trajectory is observable on $[t_0, t_N]$ if the observability Gramian matrix is invertible.
+	\end{itemize}
+
+	\note
+	{
+		\begin{itemize}
+			\item Eftersom Jacobianen f\o{}r\aa{}ndras f\o{}r varje enskild trajektoria \aa{}r det sv\a{}rt att dra n\a{}gra generella slutsatser
+			\item Dock kan det ge en fingervisning
+		\end{itemize}
+	}
+\end{frame}
+
 % ---------------
 \section{Results}
 % ---------------
+
+\subsection<presentation:0>
+{Observability}
+
+\begin{frame}<presentation:0>[noframenumbering]
+	\frametitle{Observability Results}
+	\begin{table}
+		\centering
+		\scriptsize
+		\renewcommand{\arraystretch}{1.25}
+		\setlength{\arrayrulewidth}{0.5pt}
+		\begin{tabular}{|p{5cm}|p{1cm}|p{2.1cm}|p{2.1cm}|}
+			\cline{2-4}
+			\multicolumn{1}{c|}{} & \multicolumn{3}{c|}{\textbf{Observable}} \\
+			\hline
+			\textbf{Description} & \roi & \roi and angular rate & \roi, angular rate and corners \\
+			\hline
+			\hline
+			The target is standing still with an arbitrary initial yaw angle. & No & No & Yes \\
+			\hline
+			The target is driving straight towards or straight away from the host. & Yes & Yes & Yes \\
+			\hline
+			The target is driving towards or away from the host applying sine steering. & Yes & Yes & Yes \\
+			\hline
+			The target is driving away from the host and makes a $45^\circ$ turn. & Yes & Yes & Yes \\
+			\hline
+			The target is driving across the host's lane with constant speed and constant yaw angle. & Yes & Yes & Yes \\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\note
+	{
+		\begin{itemize}
+			\item Om m\a{}let st\a{}r stilla, s\a{} finns det flera tillst\a{}ndsvektorer som ger samma \roi.
+		\end{itemize}
+	}
+\end{frame}
 
 \subsection{Monte Carlo Simulations}
 

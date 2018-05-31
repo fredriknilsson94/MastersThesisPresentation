@@ -480,12 +480,15 @@
 		\end{itemize}
 	\column{0.4\textwidth}
 		\begin{figure}
-			\begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+			\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
 				\draw (0,0) -- (3,1) -- (1.5,5.5) -- (-1.5,4.5) -- cycle;
 				\draw[dashed] (-0.5,1.5) -- (2.5,2.5) node[pos=0.3, anchor=north west] {$(x,y,z)$};
 				\draw[->] (1,2) node[circle,fill,inner sep=1.5pt] {} -- (0.3,4) node[anchor=south] {$v$};
 				\draw[dotted] (1,2) -- (1,4);
 				\draw[<-] (0.65,3) .. controls (0.8,3.1) .. (1,3.1) node[pos=0.5, anchor=west] {\hspace{0.2cm}$\psi, \omega$};
+				\draw[<->] (-0.25,-0.1) -- (-0.75,1.4) node[pos=0.5, anchor=east] {$\alpha l$};
+				\draw[<->] (-0.75,-0.3) -- (-2.25,4.2) node[pos=0.5, anchor=east] {$l$};
+				\draw[<->] (-1.6,4.8) -- (1.4,5.8) node[pos=0.5, anchor=south] {$w$};
 		    \end{tikzpicture}
 		    \caption{Target vehicle model.}
 		\end{figure}

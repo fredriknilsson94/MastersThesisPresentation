@@ -31,6 +31,7 @@
 \newcommand{\roi}{\textsc{roi}\xspace}
 \newcommand{\eg}{e.g.\xspace}
 \newcommand{\ekf}{\textsc{ekf}\xspace}
+\newcommand{\klt}{\textsc{klt}\xspace}
 \renewcommand{\a}{\r{a}\xspace}
 \renewcommand{\aa}{\"a\xspace}
 \renewcommand{\o}{\"o\xspace}
@@ -257,17 +258,21 @@
 \subsection{Feature Points}
 
 \begin{frame}{Feature Points}
-	Interesting points in the image.
 	\begin{itemize}
-		\item Feature detection
-		\item Feature description
-		\item Feature matching
-		\item Feature tracking
+		\item Feature point detection
+		\begin{itemize}
+			\item Harris corner detector
+			\item Shi and Tomasi corner detector
+		\end{itemize}
+		\item Feature point tracking
+		\begin{itemize}
+			\item Kanade-Lucas-Tomasi (\klt) feature tracker
+		\end{itemize}
 	\end{itemize}
-	\vfill
+	\vspace{-1em}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.6\textwidth]{harris_features}
+		\includegraphics[width=0.75\textwidth]{harris_features}
 		\caption{\label{fig:featurepointexample} Detected feature points marked as green crosses.}
 	\end{figure}
 

@@ -323,28 +323,6 @@
 
 \subsection{Homography}
 
-\begin{frame}<presentation:0>[noframenumbering]{Projective Transformation}
-	Mapping between different views of the same planar surface,
-	\begin{equation*}
-		\bm{x}^\prime \sim \H \bm{x},
-	\end{equation*}
-	where $\H$ is a nonsingular $3 \times 3$ matrix.
-	\vspace{1em}
-	The \textit{homography} $\H$ can be decomposed into
-	\begin{equation*}
-		\H = \rotmat + \bm{t} \bm{n}^T.
-	\end{equation*}
-
-	\note
-	{
-		\begin{itemize}
-			\item Homografin relaterar hur ett plan har f\o{}rflyttats givet projicerade punkter fr\a{}n planet
-			\item Kan delas upp i \textit{rotation} och \textit{translation}
-			\item En utmaning -- Inte unik uppdelning (8 till 2 l\o{}sningar)
-		\end{itemize}
-	}
-\end{frame}
-
 \begin{frame}{The Homography -- A Geometrical View}
     The homography, $\H$, describes the movement of a plane from correspondece of projected points.
 	\begin{figure}
@@ -374,6 +352,29 @@
 		\begin{itemize}
 			\item Ett antagande i min rapport -- Perfekt ego-motion, dvs. stillast\a{}ende host
 			\item Homografin inducerats av planets r\o{}relse, dvs. bilens r\o{}relse
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}<presentation:0>[noframenumbering]
+    \frametitle{The Homography -- A Theoretical View}
+	Mapping between different views of the same planar surface,
+	\begin{equation*}
+		\bm{x}^\prime \sim \H \bm{x},
+	\end{equation*}
+	where $\H$ is a nonsingular $3 \times 3$ matrix.
+	\vspace{1em}
+	The \textit{homography} $\H$ can be decomposed into
+	\begin{equation*}
+		\H = \rotmat + \bm{t} \bm{n}^T.
+	\end{equation*}
+
+	\note
+	{
+		\begin{itemize}
+			\item Homografin relaterar hur ett plan har f\o{}rflyttats givet projicerade punkter fr\a{}n planet
+			\item Kan delas upp i \textit{rotation} och \textit{translation}
+			\item En utmaning -- Inte unik uppdelning (8 till 2 l\o{}sningar)
 		\end{itemize}
 	}
 \end{frame}

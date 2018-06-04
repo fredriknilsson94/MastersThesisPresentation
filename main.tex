@@ -586,35 +586,26 @@
 
 \begin{frame}%<presentation:0>[noframenumbering]
 	\frametitle{Observability Results}
-	\begin{table}
-		\centering
-		\scriptsize
-		\renewcommand{\arraystretch}{1.25}
-		\setlength{\arrayrulewidth}{0.5pt}
-		\begin{tabular}{|p{5cm}|p{1cm}|p{2.1cm}|p{2.1cm}|}
-			\cline{2-4}
-			\multicolumn{1}{c|}{} & \multicolumn{3}{c|}{\textbf{Observable}} \\
-			\hline
-			\textbf{Description} & \roi & \roi and angular rate & \roi, angular rate and corners \\
-			\hline
-			\hline
-			The target is standing still with an arbitrary initial yaw angle. & No & No & Yes \\
-			\hline
-			The target is driving straight towards or straight away from the host. & Yes & Yes & Yes \\
-			\hline
-			The target is driving towards or away from the host applying sine steering. & Yes & Yes & Yes \\
-			\hline
-			The target is driving away from the host and makes a $45^\circ$ turn. & Yes & Yes & Yes \\
-			\hline
-			The target is driving across the host's lane with constant speed and constant yaw angle. & Yes & Yes & Yes \\
-			\hline
-		\end{tabular}
-	\end{table}
+	\begin{itemize}
+		\item Trajectories with a moving target were observable
+		\item If the target was standing still
+		\begin{itemize}
+			\item Observable with \roi, angular rate and corner measurements
+			\item Unobservable with only \roi and angular rate measurements
+		\end{itemize}
+		\vspace{1em}
+		\item Several state vectors can give the same \roi measurements
+	\end{itemize}
 
 	\note
 	{
 		\begin{itemize}
 			\item Om m\a{}let st\a{}r stilla, s\a{} finns det flera tillst\a{}ndsvektorer som ger samma \roi.
+			\item The target is standing still with an arbitrary initial yaw angle.
+			\item The target is driving straight towards or straight away from the host.
+			\item The target is driving towards or away from the host applying sine steering.
+			\item The target is driving away from the host and makes a $45^\circ$ turn.
+			\item The target is driving across the host's lane with constant speed and constant yaw angle.
 		\end{itemize}
 	}
 \end{frame}

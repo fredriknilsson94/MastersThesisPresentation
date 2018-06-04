@@ -402,6 +402,40 @@
 
 \subsection{Filtering Structure}
 
+\begin{frame}{Different Image Measurements}
+	\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.45\textwidth]{roi_example}};
+		\draw[red, thick, |->] (0,-0.38) -- (0.35,-0.38) node[anchor=north] {\tiny $p_\text{HCP}$};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.45\textwidth]{roi_example}};
+		\draw[red, thick, <->] (0.08,0.075) -- (0.6,0.075) node[pos = 0.5, anchor=south] {\tiny $p_\text{Width}$};
+	\end{tikzpicture}
+
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.45\textwidth]{roi_example}};
+		\draw[red, thick, |->] (0.35,0) -- (0.35,-0.39) node[pos = 0.5, anchor=west] {\tiny $p_\text{Bottom}$};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 16cm 0},width=0.45\textwidth]{corners_example}};
+		\node[red,circle,fill,inner sep=0.75pt,label=left:{\color{red}\tiny FL}] at (-0.4,-0.325) {};
+		\node[red,circle,fill,inner sep=0.75pt,label=below:{\color{red}\tiny RL}] at (0.07,-0.4) {};
+		\node[red,circle,fill,inner sep=0.75pt,label=right:{\color{red}\tiny RR}] at (0.4,-0.37) {};
+	\end{tikzpicture}
+	\caption{The different image measurements used in the filter.}
+	\end{figure}
+
+	\note
+	{
+		\begin{itemize}
+			\item Machine learning-algoritm tr\aa{}nad f\o{}r att detektera bilar
+			\item H\o{}rnm\aa{}tningarna finns det inget detektor f\o{}r idag
+		\end{itemize}
+	}
+\end{frame}
+
 \begin{frame}{Filtering Structure}
 	\begin{figure}
 		\centering
@@ -457,40 +491,6 @@
 		\begin{itemize}
 			\item Beskriv signaler till systemet
 			\item Beskriv signaler i filtret
-		\end{itemize}
-	}
-\end{frame}
-
-\begin{frame}{Different Image Measurements}
-	\begin{figure}
-	\centering
-	\begin{tikzpicture}
-		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.45\textwidth]{roi_example}};
-		\draw[red, thick, |->] (0,-0.38) -- (0.35,-0.38) node[anchor=north] {\tiny $p_\text{HCP}$};
-	\end{tikzpicture}
-	\begin{tikzpicture}
-		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.45\textwidth]{roi_example}};
-		\draw[red, thick, <->] (0.08,0.075) -- (0.6,0.075) node[pos = 0.5, anchor=south] {\tiny $p_\text{Width}$};
-	\end{tikzpicture}
-
-	\begin{tikzpicture}
-		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 15cm 0},width=0.45\textwidth]{roi_example}};
-		\draw[red, thick, |->] (0.35,0) -- (0.35,-0.39) node[pos = 0.5, anchor=west] {\tiny $p_\text{Bottom}$};
-	\end{tikzpicture}
-	\begin{tikzpicture}
-		\node[] at (0,0) {\includegraphics[angle=-90,origin=c,trim={0 0 16cm 0},width=0.45\textwidth]{corners_example}};
-		\node[red,circle,fill,inner sep=0.75pt,label=left:{\color{red}\tiny FL}] at (-0.4,-0.325) {};
-		\node[red,circle,fill,inner sep=0.75pt,label=below:{\color{red}\tiny RL}] at (0.07,-0.4) {};
-		\node[red,circle,fill,inner sep=0.75pt,label=right:{\color{red}\tiny RR}] at (0.4,-0.37) {};
-	\end{tikzpicture}
-	\caption{The different image measurements used in the filter.}
-	\end{figure}
-
-	\note
-	{
-		\begin{itemize}
-			\item Machine learning-algoritm tr\aa{}nad f\o{}r att detektera bilar
-			\item H\o{}rnm\aa{}tningarna finns det inget detektor f\o{}r idag
 		\end{itemize}
 	}
 \end{frame}
